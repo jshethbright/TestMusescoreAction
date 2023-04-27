@@ -60,8 +60,10 @@ jobs:
           tag_name: ${{ github.ref }}
       - name: Push parts to drive
         uses: adityak74/google-drive-upload-git-action@main
+        working-directory: ./scores/parts
         with:
           credentials: ${{ secrets.DRIVE_CREDS }}
-          filename: scores/parts/*/*
+          filename: ./*/*
           folderId: ${{ secrets.FOLDERID }}
           overwrite: "true"
+          mirrorDirectoryStructure: "true"
