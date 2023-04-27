@@ -34,7 +34,7 @@ jobs:
 
       - name: Generate PDFs
         run: |
-          docker run --rm -v $(pwd):/input musescore-headless-docker:latest
+          docker run --rm -v $(pwd):/input ghcr.io/jshethbright/musescore-headless-docker:latest
 
       - name: Sort PDFs
         run: |
