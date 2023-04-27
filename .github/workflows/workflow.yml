@@ -61,3 +61,11 @@ jobs:
           asset_name: pdfs.zip
           asset_content_type: application/zip
           tag_name: ${{ github.ref }}
+      - name: Push parts to drive
+        uses: adityak74/google-drive-upload-git-action@main
+        with:
+          credentials: ${{ secrets.DRIVE_CREDEs }}
+          filename: scores/parts/*
+          folderId: ${{ secrets.FOLDERID }}
+          overwrite: "true"
+          mirrorDirectoryStructure: "true"
