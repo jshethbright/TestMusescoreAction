@@ -3,7 +3,8 @@ on:
   release:
    types:
       - published
-
+env:
+  REGISTRY: ghcr.io
 jobs:
   generate-pdfs:
     runs-on: ubuntu-latest
@@ -20,14 +21,20 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r scripts/requirements.txt
-    
-      - name: Build Docker image
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Pull Docker image
         run: |
-          docker build -t musescore .
+          docker pull ghcr.io/jshethbright/musescore-headless-docker:latest
 
       - name: Generate PDFs
         run: |
-          docker run --rm -v $(pwd):/input musescore
+          docker run --rm -v $(pwd):/input musescore-headless-docker:latest
 
       - name: Sort PDFs
         run: |
