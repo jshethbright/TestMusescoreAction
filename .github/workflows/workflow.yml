@@ -48,6 +48,8 @@ jobs:
       - name: Create artifact
         run: |
           zip -r scores/parts/pdfs.zip scores/parts/*
+          cd scores/parts
+          ls
       - name: Attach artifact to release
         uses: actions/upload-release-asset@v1
         env:
