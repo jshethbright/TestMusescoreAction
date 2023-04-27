@@ -59,8 +59,8 @@ jobs:
           asset_content_type: application/zip
           tag_name: ${{ github.ref }}
       - name: Push parts to drive
-        uses: adityak74/google-drive-upload-git-action@main
         working-directory: ./scores/parts
+        uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{ secrets.DRIVE_CREDS }}
           filename: ./*/*
