@@ -61,7 +61,7 @@ jobs:
       - name: Prepare parts for drive push
         run: |
           mkdir parts
-          mv scores/parts parts/
+          mv scores/parts ./
       - name: Push parts to drive
         uses: adityak74/google-drive-upload-git-action@main
         with:
