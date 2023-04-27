@@ -46,11 +46,8 @@ jobs:
         run: |
           python scripts/partsorter.py "scores/" "partmap.yaml"
       - name: Create artifact
-        uses: thedoctor0/zip-release@0.7.1
-        with:
-          type: 'zip'
-          filename: 'pdfs.zip'
-          directory: 'scores/parts'
+        run: |
+          zip -r scores/parts/pdfs.zip scores/parts/*
       - name: Attach artifact to release
         uses: actions/upload-release-asset@v1
         env:
@@ -68,4 +65,3 @@ jobs:
           filename: scores/parts/*
           folderId: ${{ secrets.FOLDERID }}
           overwrite: "true"
-          mirrorDirectoryStructure: "true"
