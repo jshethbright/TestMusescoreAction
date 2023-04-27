@@ -64,7 +64,7 @@ jobs:
       - name: Push parts to drive
         uses: adityak74/google-drive-upload-git-action@main
         with:
-          credentials: ${{ secrets.DRIVE_CREDEs }}
+          credentials: ${{ secrets.DRIVE_CREDS }}
           filename: scores/parts/*
           folderId: ${{ secrets.FOLDERID }}
           overwrite: "true"
