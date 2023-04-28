@@ -1,12 +1,11 @@
-name: Generate PDFs from MSCZ files
+name: Generate Audio from MSCZ files
 on: 
-  release:
-   types:
-      - published
+  workflow_dispatch:
+   
 env:
   REGISTRY: ghcr.io
 jobs:
-  generate-pdfs:
+  generate-audio:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -38,13 +37,13 @@ jobs:
         run: |
           docker pull ghcr.io/jshethbright/musescore-headless-docker:latest
 
-      - name: Generate PDFs
+      - name: Generate Audio
         run: |
           docker run --rm -v $(pwd):/input ghcr.io/jshethbright/musescore-headless-docker:latest
 
-      - name: Sort PDFs
+      - name: Sort Audio
         run: |
-          python scripts/partsorter.py "scores/" "partmap.yaml" "pdf"
+          python scripts/partsorter.py "scores/" "partmap.yaml" "audio"
       - name: Create artifact
         run: |
           zip -r scores/pdfs.zip scores/parts/*
