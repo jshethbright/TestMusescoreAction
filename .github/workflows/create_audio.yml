@@ -39,20 +39,20 @@ jobs:
 
       - name: Generate audio
         run: |
-          docker run --rm -v $(pwd):/input ghcr.io/jshethbright/musescore-headless-docker:latest
+          docker run --rm -v $(pwd):/input ghcr.io/jshethbright/musescore-headless-docker:latest audio_job.json
 
       - name: Sort audio
         run: |
           python scripts/partsorter.py "scores/" "partmap.yaml" "audio"
-      - name: Prepare parts for Drive push
+      - name: Prepare audio for Drive push
         run: |
-          mkdir parts
-          mv scores/parts ./
+          mkdir audio
+          mv scores/parts/* ./audio/
       - name: Push parts to Drive
         uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{ secrets.DRIVE_CREDS }}
-          filename: parts/*/*
+          filename: audio/*/*
           folderId: ${{ secrets.FOLDERID }}
           overwrite: "true"
           mirrorDirectoryStructure: "true"
