@@ -38,7 +38,7 @@ woodwinds:
   - oboe
   - piccolo
   - tenor_saxophone
-  - treble bassoon
+  - treble_bassoon
 strings:
   - contrabass
   - harp
